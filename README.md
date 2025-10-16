@@ -13,7 +13,6 @@ A minimalist implementation of the classic 2048 puzzle game built with **Next.js
 - Responsive, mobile-friendly layout.
 - Score tracking.
 - Clean, modular codebase written in TypeScript.
-- No undo or swap options (for authentic 2048 challenge).
 
 ---
 
@@ -28,7 +27,7 @@ Ensure you have the following installed:
 1. Clone the repository:
    ```bash
    git clone https://github.com/shank-codes/2048-game.git
-   cd nextjs-2048
+   cd 2048-game
    ```
 
 2. Install dependencies:
