@@ -20,7 +20,7 @@ function cloneGrid(grid: number[][]): number[][] {
 }
 
 export function has2048(grid: number[][]): boolean {
-  return grid.some((row) => row.some((v) => v === 64));
+  return grid.some((row) => row.some((v) => v === 2048));
 }
 
 export function canMove(grid: number[][]): boolean {
