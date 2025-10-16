@@ -1,14 +1,16 @@
 "use client";
 import React, { useEffect, useState, useCallback } from "react";
 import Board from "./Board";
+import ArrowControls from "./ArrowControls";
 import {
   createEmptyGrid,
   addRandomTile,
   moveGrid,
   has2048,
   canMove,
-} from "./logic";
-import useSwipe from "./useSwipe";
+} from "@/lib/gameLogic";
+import useSwipe from "@/customHooks/useSwipe";
+import { Direction } from "@/types/controls.type";
 
 interface Game2048Props {
   initialSize?: number;
@@ -57,10 +59,8 @@ const Game2048: React.FC<Game2048Props> = ({ initialSize = 4 }) => {
     [grid, won, lost]
   );
 
-  type Direction = "up" | "down" | "left" | "right";
-
   const handleMove = (direction: Direction) => {
-    doMove(direction); // existing game move logic
+    doMove(direction);
   };
 
   useEffect(() => {
@@ -79,15 +79,15 @@ const Game2048: React.FC<Game2048Props> = ({ initialSize = 4 }) => {
 
   return (
     <div className="p-6 max-w-3xl mx-auto">
-      <div className="flex items-center justify-between mb-4">
+      <header className="flex items-center justify-between mb-4">
         <h1 className="text-2xl font-bold">2048 — Custom Board</h1>
-        <div className="text-right">
+        <div className="flex flex-col items-center text-right">
           <div className="text-sm">Score</div>
           <div className="text-xl font-semibold">{score}</div>
         </div>
-      </div>
+      </header>
 
-      <div className="flex gap-4 items-center mb-4">
+      <section className="flex gap-4 items-center mb-4 justify-between">
         <label className="flex items-center gap-2">
           Board size:
           <select
@@ -108,61 +108,34 @@ const Game2048: React.FC<Game2048Props> = ({ initialSize = 4 }) => {
 
         <button
           onClick={() => resetBoard(size)}
-          className="ml-2 px-3 py-1 rounded bg-blue-600 text-gray-400"
+          className="ml-2 px-3 py-1 rounded bg-blue-500 text-white cursor-pointer"
         >
           New Game
         </button>
-      </div>
+      </section>
 
-      <div
-        className="bg-gray-800 p-3 rounded-lg inline-block"
+      <section
+        className="bg-gray-800 p-3 rounded-lg flex flex-col items-center"
         style={{ touchAction: "none" }}
       >
         <Board grid={grid} />
-        <div className="mt-6 flex flex-col items-center space-y-2">
-          <button
-            onClick={() => handleMove("up")}
-            className="bg-gray-200 hover:bg-gray-300 p-3 rounded-xl text-xl font-bold shadow"
-          >
-            ↑
-          </button>
-          <div className="flex space-x-4">
-            <button
-              onClick={() => handleMove("left")}
-              className="bg-gray-200 hover:bg-gray-300 p-3 rounded-xl text-xl font-bold shadow"
-            >
-              ←
-            </button>
-            <button
-              onClick={() => handleMove("down")}
-              className="bg-gray-200 hover:bg-gray-300 p-3 rounded-xl text-xl font-bold shadow"
-            >
-              ↓
-            </button>
-            <button
-              onClick={() => handleMove("right")}
-              className="bg-gray-200 hover:bg-gray-300 p-3 rounded-xl text-xl font-bold shadow"
-            >
-              →
-            </button>
-          </div>
-        </div>
-      </div>
+        <ArrowControls handleMove={handleMove} />
+      </section>
 
       {won && (
-        <div className="mt-4 p-4 bg-green-100 rounded">
+        <div className="mt-4 p-4 bg-green-400 text-gray-50 rounded text-center">
           You reached 2048! 🎉
         </div>
       )}
       {lost && (
-        <div className="mt-4 p-4 bg-red-100 rounded">
+        <div className="mt-4 p-4 bg-red-400 text-gray-50 rounded text-center">
           No moves left — game over.
         </div>
       )}
 
-      <div className="mt-4 text-sm text-gray-600">
+      <p className="mt-4 text-sm text-gray-600">
         Controls: arrow keys or swipe
-      </div>
+      </p>
     </div>
   );
 };
