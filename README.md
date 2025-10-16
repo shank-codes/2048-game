@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 2048 Game (Next.js + TypeScript)
 
-## Getting Started
+A minimalist implementation of the classic 2048 puzzle game built with **Next.js (App Router)** and **TypeScript**, featuring dynamic board sizes, keyboard and GUI controls, and a clean Tailwind-powered UI.
 
-First, run the development server:
+🌐 **Live Demo:** https://2048-game-opal-nine.vercel.app/  
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 🚀 Features
+- Built using **Next.js App Router** inside `src/app`.
+- Dynamic board size selection.
+- Supports both **keyboard arrow keys** and **on-screen GUI arrow buttons**.
+- Responsive, mobile-friendly layout.
+- Score tracking.
+- Clean, modular codebase written in TypeScript.
+- No undo or swap options (for authentic 2048 challenge).
+
+---
+
+## 🛠️ Installation
+
+### Prerequisites
+Ensure you have the following installed:
+- **Node.js** (>= 18.x)
+- **npm** or **yarn**
+
+### Steps
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/shank-codes/2048-game.git
+   cd nextjs-2048
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. Run the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+4. Open the app in your browser:
+   ```
+   http://localhost:3000
+   ```
+
+---
+
+## 🎮 Gameplay Instructions
+
+1. **Objective:** Merge tiles with the same number to reach **2048**.
+2. **Controls:**
+   - Use **arrow keys** on desktop.
+   - Use **on-screen arrow buttons** on mobile or touch devices.
+3. **Board Size:**
+   - Select a grid size using the dropdown before starting.
+4. **Game Over:** The game ends when no valid moves remain.
+
+---
+
+## ⚙️ Implementation Details
+
+### 1. Project Structure
+```
+src/
+ ├── app/
+ │   ├── page.tsx         # Main entry page
+ │   ├── globals.css      # Tailwind styles
+ │   └── components/
+ │       ├── index.tsx  # Main game component
+ │       ├── Board.tsx       # NxN board component
+ │       └── Controls.tsx   # On-screen arrow buttons
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Core Logic
+- The game state is maintained as a **2D grid array** of numbers.
+- Movement functions handle merging, shifting, and spawning new tiles.
+- A random tile (2 or 4) is generated after every valid move.
+- Score is tracked using React state.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Input Handling
+- Keyboard inputs (`ArrowUp`, `ArrowDown`, `ArrowLeft`, `ArrowRight`) trigger movement.
+- GUI controls call the same handler via `handleMove(direction)`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Dynamic Board Size
+- The board is reinitialized when the user selects a new size.
+- Dropdown automatically blurs after selection to allow immediate keyboard play.
 
-## Learn More
+### 5. Styling
+- Built with **Tailwind CSS** for consistent and modern UI.
+- Tiles have color mapping based on their numeric value.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🧩 Future Enhancements
+- Smooth animations for tile movement and merging.
+- Persistent high-score storage using localStorage.
+- Sound effects and haptic feedback.
+- Light/Dark theme toggle.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📄 License
+This project is open source under the **MIT License**.
