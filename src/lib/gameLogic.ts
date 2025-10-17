@@ -1,3 +1,5 @@
+const target = 2048;
+
 export function createEmptyGrid(n: number): number[][] {
   return Array.from({ length: n }, () => Array.from({ length: n }, () => 0));
 }
@@ -20,7 +22,7 @@ function cloneGrid(grid: number[][]): number[][] {
 }
 
 export function has2048(grid: number[][]): boolean {
-  return grid.some((row) => row.some((v) => v === 2048));
+  return grid.some((row) => row.some((v) => v === target));
 }
 
 export function canMove(grid: number[][]): boolean {
