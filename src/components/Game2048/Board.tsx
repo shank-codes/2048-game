@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 
 interface BoardProps {
   grid: number[][];
@@ -23,17 +24,22 @@ const tileColor = (val: number): string => {
 };
 
 const Board: React.FC<BoardProps> = ({ grid }) => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => setIsClient(true), []);
+
+  if (!isClient) {
+    return null;
+  }
+
   const size = grid.length;
-  const gap = 4;
 
   return (
     <div
-      className="grid bg-[#555555] p-2 rounded-lg mx-auto"
+      id="game-board"
+      className={`grid bg-[#555555] p-2 rounded-lg mx-auto gap-[4px] w-full max-w-[500px] will-change-transform`}
       style={{
         gridTemplateColumns: `repeat(${size}, 1fr)`,
-        gap: `${gap}px`,
-        width: "100%",           // make it responsive to parent
-        maxWidth: "500px",       // constrain max board width
       }}
     >
       {grid.flat().map((val, idx) => (
@@ -45,8 +51,8 @@ const Board: React.FC<BoardProps> = ({ grid }) => {
             background: tileColor(val),
             color: val > 4 ? "#fefefd" : "#776e65",
             boxShadow: val ? "inset 0 -4px rgba(0,0,0,0.2)" : "none",
-            fontSize: `clamp(0.8rem, ${12 / size}vw, 1.5rem)`, 
-            // min font size 0.8rem, max 1.5rem, scales better with small boards
+            // fontSize: `clamp(0.9rem, 2.5vw, 1.5rem)`, // slightly bigger min and use vw carefully
+            fontSize: `clamp(0.8rem, ${12 / size}vw, 1.5rem)`,
           }}
         >
           {val || ""}

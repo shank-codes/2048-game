@@ -9,7 +9,7 @@ import {
   has2048,
   canMove,
 } from "@/lib/gameLogic";
-import useSwipe from "@/customHooks/useSwipe";
+// import useSwipe from "@/customHooks/useSwipe";
 import { Direction } from "@/types/controls.type";
 
 interface Game2048Props {
@@ -77,10 +77,10 @@ const Game2048: React.FC<Game2048Props> = ({ initialSize = 4 }) => {
     return () => window.removeEventListener("keydown", handler);
   }, [grid]);
 
-  useSwipe(doMove);
+  // useSwipe(doMove);
 
   return (
-    <div className="p-6 max-w-full mx-auto">
+    <div className="p-4 sm:p-6 max-w-full mx-auto">
       <header className="flex items-center justify-between mb-4">
         <h1 className="text-xl font-bold">2048 — Custom Board</h1>
         <div className="flex flex-col items-center text-right border-2 rounded-sm p-1">
@@ -118,9 +118,9 @@ const Game2048: React.FC<Game2048Props> = ({ initialSize = 4 }) => {
 
       <section
         className="bg-gray-800 p-3 rounded-lg flex flex-col items-center"
-        style={{ touchAction: "none" }}
+        // style={{ touchAction: "none" }}
       >
-        <Board grid={grid} />
+        <Board key={size} grid={grid} />
         <ArrowControls handleMove={handleMove} />
       </section>
 
@@ -135,7 +135,9 @@ const Game2048: React.FC<Game2048Props> = ({ initialSize = 4 }) => {
         </div>
       )}
 
-      <p className="mt-4 text-sm text-gray-50">Controls: arrow keys or swipe</p>
+      <p className="mt-4 text-sm text-gray-50">
+        Controls: keyboard or GUI arrow keys
+      </p>
     </div>
   );
 };
