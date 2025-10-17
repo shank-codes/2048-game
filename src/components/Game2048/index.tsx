@@ -16,6 +16,8 @@ interface Game2048Props {
   initialSize?: number;
 }
 
+const gridSizes = [3, 4, 5, 6, 7, 8, 9];
+
 const Game2048: React.FC<Game2048Props> = ({ initialSize = 4 }) => {
   const [size, setSize] = useState(initialSize);
   const [grid, setGrid] = useState<number[][]>(createEmptyGrid(initialSize));
@@ -78,12 +80,12 @@ const Game2048: React.FC<Game2048Props> = ({ initialSize = 4 }) => {
   useSwipe(doMove);
 
   return (
-    <div className="p-6 max-w-3xl mx-auto">
+    <div className="p-6 max-w-full mx-auto">
       <header className="flex items-center justify-between mb-4">
-        <h1 className="text-2xl font-bold">2048 — Custom Board</h1>
-        <div className="flex flex-col items-center text-right">
-          <div className="text-sm">Score</div>
-          <div className="text-xl font-semibold">{score}</div>
+        <h1 className="text-xl font-bold">2048 — Custom Board</h1>
+        <div className="flex flex-col items-center text-right border-2 rounded-sm p-1">
+          <div className="text-xs">Score</div>
+          <div className="text-base font-semibold">{score}</div>
         </div>
       </header>
 
@@ -98,7 +100,7 @@ const Game2048: React.FC<Game2048Props> = ({ initialSize = 4 }) => {
             }}
             className="ml-2 border rounded px-2 py-1"
           >
-            {[3, 4, 5, 6, 7, 8, 9].map((n) => (
+            {gridSizes.map((n) => (
               <option key={n} value={n}>
                 {n} × {n}
               </option>
@@ -133,9 +135,7 @@ const Game2048: React.FC<Game2048Props> = ({ initialSize = 4 }) => {
         </div>
       )}
 
-      <p className="mt-4 text-sm text-gray-600">
-        Controls: arrow keys or swipe
-      </p>
+      <p className="mt-4 text-sm text-gray-50">Controls: arrow keys or swipe</p>
     </div>
   );
 };
